@@ -10,7 +10,7 @@ import { Hero } from 'src/app/core/models/hero';
 })
 export class HerosComponent implements OnInit {
 
-  hero: Hero;
+  heroes: Array<Hero> = [];
 
   searchForm: FormGroup = new FormGroup({
     name: new FormControl('', [])
@@ -19,10 +19,13 @@ export class HerosComponent implements OnInit {
   constructor(private usingMarvelApiService: UsingMarvelApiService) { }
 
   ngOnInit() {
-    this.usingMarvelApiService.getCharacters({}).subscribe((data: any) => {
-      this.hero = data;
-      console.log(this.hero);
-      //console.log(data);
+    this.usingMarvelApiService.getCharacters({}).subscribe((heroes: Array<Hero>) => {
+      this.heroes = heroes;
+      // Не у всех персонажей есть описание, обработка таких случаев
+      this.heroes.forEach(function(hero){
+        if (hero.description === "") hero.description = "no official description"
+      })
+      console.log(this.heroes);
     })
   }
 

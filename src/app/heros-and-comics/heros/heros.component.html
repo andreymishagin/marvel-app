@@ -5,10 +5,10 @@
   <form [formGroup]="searchForm">
     <input type="text" formControlName="name" placeholder="Search by name">
   </form>
-  <ul>
-    <li><img src="http://pikchyriki.net/avatar/multyashki/100/70.jpg" alt=""><p> {{ hero?.data.results[0].name }} + Краткое описание</p></li>
-    <li><img src="http://pikchyriki.net/avatar/multyashki/100/70.jpg" alt=""><p>Hero name + Краткое описание</p></li>
-    <li><img src="http://pikchyriki.net/avatar/multyashki/100/70.jpg" alt=""><p>Hero name + Краткое описание</p></li>
+  <br>
+  <ul *ngFor="let hero of heroes">
+    <li><img class="hero__image" src="{{hero.thumbnail.path}}/standard_medium.{{hero.thumbnail.extension}}"><p>Имя: {{ hero?.name }} </p><p>Описание: {{ hero?.description }}</p> </li>
+    
   </ul>
 </div>
 <footer>
