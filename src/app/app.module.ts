@@ -14,7 +14,8 @@ import { environment } from 'src/environments/environment';
 
 const routes: Routes =[
   { path: '', component: HerosAndComicsComponent, pathMatch: 'full'},
-  { path: 'heros', component: HerosComponent},
+  // С помощью параметра numbers выводим постранично персонажей
+  { path: 'heros/:numbers', component: HerosComponent},
   { path: 'comics', component: ComicsComponent },
   { path: '**', redirectTo: ''}
 ];

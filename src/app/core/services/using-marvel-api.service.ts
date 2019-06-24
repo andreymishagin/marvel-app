@@ -12,26 +12,26 @@ export class UsingMarvelApiService {
   marvelAPI = environment.marvelAPI;
   marvelAPIHash: string;
   marvelAPIKey: string;
+  // Статическая переменная с общим количеством персонажей, необходимая для определения последнего элемента постраничного поиска
+  public static totalHeroes: number;
 
   constructor(private http: HttpClient, private injector: Injector) {
     this.marvelAPIHash = this.injector.get('MARVEL_API_HASH');
     this.marvelAPIKey = this.injector.get('MARVEL_API_PUBKEY');
    }
 
-   getCharacters({name = '' , limit = 60}) {
+   getCharacters(name, limit, offset) {
     let queryUrl = `${this.marvelAPI}/characters?ts=1&apikey=${this.marvelAPIKey}&hash=${this.marvelAPIHash}`;
     if (name) {
       queryUrl += `&nameStartsWith=${name}`;
     } else {
 
-      queryUrl += `&offset=${Math.ceil(Math.random() * 300) + 20}`;
+      queryUrl += `&offset=${offset}`;
     }
     queryUrl += `&limit=${limit}`;
-    return this.http.get<{
-      data: {results: Array<Hero>}
-    }>(queryUrl).pipe(
+    return this.http.get<any>(queryUrl).pipe(
       map((resp) => {
-        console.log(queryUrl);
+        UsingMarvelApiService.totalHeroes = resp.data.total;
         return resp.data.results;
       })
     );

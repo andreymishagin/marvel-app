@@ -8,9 +8,12 @@
   <br>
   <ul *ngFor="let hero of heroes">
     <li><img class="hero__image" src="{{hero.thumbnail.path}}/standard_medium.{{hero.thumbnail.extension}}"><p>Имя: {{ hero?.name }} </p><p>Описание: {{ hero?.description }}</p> </li>
-    
   </ul>
 </div>
-<footer>
-  <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-</footer>
+<div class="container">
+  <footer>
+    <span  *ngFor="let startLink of startLinks">  <a routerLink="/heros/{{startLink}}" (click) = "loadSelectedList()"> {{startLink}} </a> </span> 
+    ... 
+    <span  *ngFor="let endLink of endLinks">  <a routerLink="/heros/{{endLink}}" (click) = "loadSelectedList()"> {{endLink}} </a> </span> 
+  </footer>
+</div>
