@@ -1,16 +1,20 @@
-<!--Сделать приличный навбар-->
 <div class="container">
-  <a routerLink=""> Main </a>
-  <a routerLink="heros/1"> Heros </a>
-  <a routerLink="comics"> Comics </a>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Main</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="heros/1" routerLinkActive="active">Heros</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="comics" routerLinkActive="active">Comics</a>
+    </li>
+  </ul>
 </div>
-<div class="container">
-  <h1>
-    {{ title }}
-  </h1>
-</div>
+
 Задачи на сегодня: <br>
 1. Сделать постраничный поиск <br>
 2. Сделать поиск по героям <br>
 3. Переходить на личную страницу каждого героя <br>
+
 <router-outlet></router-outlet>

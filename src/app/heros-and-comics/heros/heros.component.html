@@ -7,13 +7,20 @@
   </form>
   <br>
   <ul *ngFor="let hero of heroes">
-    <li><img class="hero__image" src="{{hero.thumbnail.path}}/standard_medium.{{hero.thumbnail.extension}}"><p>Имя: {{ hero?.name }} </p><p>Описание: {{ hero?.description }}</p> </li>
+    <li><img class="img-thumbnail" src="{{hero.thumbnail.path}}/standard_medium.{{hero.thumbnail.extension}}"><p>Имя: {{ hero?.name }} </p><p>Описание: {{ hero?.description }}</p> </li>
   </ul>
+
+  <ul>
+    <li *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: p, totalItems: 1491 }"> {{item}} </li>
+  </ul>
+  <pagination-controls (pageChange)="p = $event" maxSize="10"></pagination-controls>
+
 </div>
 <div class="container">
-  <footer>
+  <!-- <footer>
     <span  *ngFor="let startLink of startLinks">  <a routerLink="/heros/{{startLink}}" (click) = "loadSelectedList()"> {{startLink}} </a> </span> 
     ... 
     <span  *ngFor="let endLink of endLinks">  <a routerLink="/heros/{{endLink}}" (click) = "loadSelectedList()"> {{endLink}} </a> </span> 
-  </footer>
+  </footer> -->
+  <span>  </span>
 </div>

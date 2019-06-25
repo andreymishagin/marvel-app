@@ -4,6 +4,7 @@ import {Routes, RouterModule} from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule }   from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { HerosAndComicsComponent } from './heros-and-comics/heros-and-comics.component';
@@ -34,7 +35,8 @@ const routes: Routes =[
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [
     UsingMarvelApiService,
