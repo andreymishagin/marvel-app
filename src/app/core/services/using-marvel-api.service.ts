@@ -20,7 +20,7 @@ export class UsingMarvelApiService {
     this.marvelAPIKey = this.injector.get('MARVEL_API_PUBKEY');
    }
 
-   getCharacters(name, limit, offset) {
+   getCharacters (name, limit, offset) {
     let queryUrl = `${this.marvelAPI}/characters?ts=1&apikey=${this.marvelAPIKey}&hash=${this.marvelAPIHash}`;
     if (name) {
       queryUrl += `&nameStartsWith=${name}`;
@@ -29,6 +29,16 @@ export class UsingMarvelApiService {
       queryUrl += `&offset=${offset}`;
     }
     queryUrl += `&limit=${limit}`;
+    return this.http.get<any>(queryUrl).pipe(
+      map((resp) => {
+        UsingMarvelApiService.totalHeroes = resp.data.total;
+        return resp.data.results;
+      })
+    );
+  }
+
+  getHero (id) {
+    let queryUrl = `${this.marvelAPI}/characters/${id}?ts=1&apikey=${this.marvelAPIKey}&hash=${this.marvelAPIHash}`;
     return this.http.get<any>(queryUrl).pipe(
       map((resp) => {
         UsingMarvelApiService.totalHeroes = resp.data.total;

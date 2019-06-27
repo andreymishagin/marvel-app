@@ -1,0 +1,20 @@
+<br>
+Персональная страница героя <br>
+∙Детальное описание<br>
+∙Изображение героя<br>
+∙Ссылки на внешние ресурсы (wiki, comiclink, …)<br>
+∙Списков комиксов с участием героя с возможностью перехода на страницу конкретного комикса<br>
+
+<div class="container">
+  <div class="container shadow p-3 mb-5" style="background-color:lightgrey">
+    <img class="img-thumbnail" src="{{hero?.thumbnail.path}}/portrait_uncanny.{{hero?.thumbnail.extension}}">
+    <p>Имя: {{ hero?.name }} </p>
+    <p>Описание: {{ hero?.description }}</p>
+    <ul>
+      <p>Ссылки</p>
+      <li *ngFor="let url of hero?.urls"> 
+        <a href="{{ url.url }}">{{ url.type }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

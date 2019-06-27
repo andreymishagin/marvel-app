@@ -1,8 +1,12 @@
 export interface Hero {
-    thumbnail: {
-      extension: string;
-      path: string;
-    };
-    name: string;
+  comics: Array<any>;
+  thumbnail: {
+    extension: string;
+    path: string;
+  };
+  id: number;
+  name: string;
+  resourceURI: string;
+  urls: Array<any>;
     description: string;
   }

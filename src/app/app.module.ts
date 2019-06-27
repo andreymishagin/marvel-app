@@ -12,13 +12,14 @@ import { HerosComponent } from './heros-and-comics/heros/heros.component';
 import { ComicsComponent } from './heros-and-comics/comics/comics.component';
 import { UsingMarvelApiService } from './core/services/using-marvel-api.service';
 import { environment } from 'src/environments/environment';
+import { HeroComponent } from './heros-and-comics/heros/hero/hero.component';
 
 const routes: Routes =[
   { path: '', component: HerosAndComicsComponent, pathMatch: 'full'},
-  // С помощью параметра numbers выводим постранично персонажей
-  { path: 'heros', component: HerosComponent},
+  { path: 'hero/:heroid', component: HeroComponent },
+  { path: 'heros', component: HerosComponent },
   { path: 'comics', component: ComicsComponent },
-  { path: '**', redirectTo: ''}
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
@@ -28,7 +29,8 @@ const routes: Routes =[
     ComicsComponent,
     HerosAndComicsComponent,
     HerosComponent,
-    ComicsComponent
+    ComicsComponent,
+    HeroComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,7 @@ const routes: Routes =[
     UsingMarvelApiService,
     {
       provide: 'MARVEL_API_PUBKEY',
-      useValue: environment.marvelPubKey  // you can fetch this from env variables too
+      useValue: environment.marvelPubKey  
     }, {
       provide: 'MARVEL_API_HASH',
       useValue: environment.marvelPubHash
