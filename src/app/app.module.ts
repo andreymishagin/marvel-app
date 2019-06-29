@@ -13,11 +13,13 @@ import { ComicsComponent } from './heros-and-comics/comics/comics.component';
 import { UsingMarvelApiService } from './core/services/using-marvel-api.service';
 import { environment } from 'src/environments/environment';
 import { HeroComponent } from './heros-and-comics/heros/hero/hero.component';
+import { ComicComponent } from './heros-and-comics/comics/comic/comic.component';
 
 const routes: Routes =[
   { path: '', component: HerosAndComicsComponent, pathMatch: 'full'},
   { path: 'hero/:heroid', component: HeroComponent },
   { path: 'heros', component: HerosComponent },
+  { path: 'comic/:comicid', component: ComicComponent },
   { path: 'comics', component: ComicsComponent },
   { path: '**', redirectTo: '' }
 ];
@@ -30,7 +32,8 @@ const routes: Routes =[
     HerosAndComicsComponent,
     HerosComponent,
     ComicsComponent,
-    HeroComponent
+    HeroComponent,
+    ComicComponent
   ],
   imports: [
     BrowserModule,

@@ -34,6 +34,7 @@ export class UsingMarvelApiService {
 
   getHero (id) {
     let queryUrl = `${this.marvelAPI}/characters/${id}?ts=1&apikey=${this.marvelAPIKey}&hash=${this.marvelAPIHash}`;
+    
     return this.http.get<any>(queryUrl).pipe(
       map((resp) => {
         return resp.data.results;
@@ -48,5 +49,15 @@ export class UsingMarvelApiService {
     queryUrl += `&limit=${limit}`;
 
     return this.http.get<any>(queryUrl);
+  }
+
+  getComic (id){
+    let queryUrl = `${this.marvelAPI}/comics/${id}?ts=1&apikey=${this.marvelAPIKey}&hash=${this.marvelAPIHash}`;
+
+    return this.http.get<any>(queryUrl).pipe(
+      map((resp) => {
+        return resp.data.results;
+      })
+    );
   }
 }

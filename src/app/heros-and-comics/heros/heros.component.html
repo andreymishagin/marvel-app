@@ -9,7 +9,7 @@
     <ul>
       <li *ngFor="let hero of heroes | paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalPages }"> 
         <img class="img-thumbnail" src="{{hero.thumbnail.path}}/standard_medium.{{hero.thumbnail.extension}}">
-        <p> <a routerLink="/hero/{{hero.id}}">Имя: {{ hero?.name }} </a> </p>
+        <p>Имя:  <a routerLink="/hero/{{hero.id}}">{{ hero?.name }} </a> </p>
         <p>Описание: {{ hero?.description }}</p> 
       </li>
     </ul>

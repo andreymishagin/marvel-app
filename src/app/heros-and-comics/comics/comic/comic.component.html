@@ -1,0 +1,17 @@
+Страница с детальным описанием комикса <br>
+∙ Детальное описание <br>
+∙ Список героев с переходом на персональную страницу героя <br>
+
+<div class="container">
+  <div class="container shadow p-3 mb-5" style="background-color:lightgrey">
+    <img class="img-thumbnail" src="{{comics?.thumbnail.path}}/portrait_uncanny.{{comics?.thumbnail.extension}}">
+    <p>Название: {{ comics?.title }} </p>
+    <p>Описание: {{ comics?.description }}</p>
+    <ul>
+      <p>Ссылки на персонажей из комикса:</p>
+      <li *ngFor="let character of comics?.characters.items; index as i"> 
+        <p><a routerLink="/hero/{{charcaterId[i]}}">{{ character.name }} </a> {{ character.check }} </p>
+      </li>
+    </ul>
+  </div>
+</div>
