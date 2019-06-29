@@ -1,7 +1,9 @@
 <br>
 Персональная страница героя <br>
-Откладывается до создания сервиса с комиксами <br>
+
 ∙Списков комиксов с участием героя с возможностью перехода на страницу конкретного комикса<br>
+Апи возвращает 20 объектов, даже если их на самом деле больше, нужно исправить <br>
+Обработать случай, когда нет доступных комиксов для персонажа
 
 <div class="container">
   <div class="container shadow p-3 mb-5" style="background-color:lightgrey">
@@ -9,10 +11,17 @@
     <p>Имя: {{ hero?.name }} </p>
     <p>Описание: {{ hero?.description }}</p>
     <ul>
-      <p>Ссылки</p>
+      <p>Ссылки:</p>
       <li *ngFor="let url of hero?.urls"> 
         <a target="_blank" href="{{ url.url }}">{{ url.type }}</a>
       </li>
     </ul>
+
+    <ul>
+        <p>Список комиксов:</p>
+        <li *ngFor="let comics of hero?.comics.items; index as i"> 
+          <p> <a target="_blank" routerLink="/comic/{{comicsId[i]}}">{{ comics.name }}</a> {{ comics.check }} </p>
+        </li>
+      </ul>
   </div>
 </div>

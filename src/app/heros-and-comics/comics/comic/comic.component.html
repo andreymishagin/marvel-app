@@ -10,7 +10,7 @@
     <ul>
       <p>Ссылки на персонажей из комикса:</p>
       <li *ngFor="let character of comics?.characters.items; index as i"> 
-        <p><a routerLink="/hero/{{charcaterId[i]}}">{{ character.name }} </a> {{ character.check }} </p>
+        <p><a target="_blank" routerLink="/hero/{{charcaterId[i]}}">{{ character.name }} </a> {{ character.check }} </p>
       </li>
     </ul>
   </div>

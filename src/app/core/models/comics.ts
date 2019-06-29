@@ -1,7 +1,7 @@
 export interface Comics {
     characters: {
         available: number,
-        collectionURI: string;
+        collectionURI: string,
         items: Array<{
           resourceURI: string,
           name: string;

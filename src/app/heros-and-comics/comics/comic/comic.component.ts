@@ -27,6 +27,7 @@ export class ComicComponent implements OnInit {
       })
 
       this.comics = comics[0];
+      // Обработка случая, когда нет ни одного доступного персонажа для выбранного комикса
       if (this.comics.characters.available === 0){
         this.comics.characters.items.push({resourceURI: '', name: '', check: 'no available characters for this comics'});
       };
