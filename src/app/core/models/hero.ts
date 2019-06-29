@@ -8,5 +8,5 @@ export interface Hero {
   name: string;
   resourceURI: string;
   urls: Array<any>;
-    description: string;
-  }
+  description: string;
+}

@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { UsingMarvelApiService } from 'src/app/core/services/using-marvel-api.service';
 import { Hero } from 'src/app/core/models/hero';
 import { ActivatedRoute, Router} from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-heros',
@@ -22,8 +23,11 @@ export class HerosComponent implements OnInit {
   nameOfHero: string;
   limitOfHeroes: number;
   offset: number;
+  totalPages: number;
 
-  constructor(private usingMarvelApiService: UsingMarvelApiService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private usingMarvelApiService: UsingMarvelApiService, private activatedRoute: ActivatedRoute, private router: Router) { 
+    
+  }
 
   ngOnInit() { 
 
@@ -31,7 +35,14 @@ export class HerosComponent implements OnInit {
     this.limitOfHeroes = 10;
     this.offset = 0;
 
-    this.usingMarvelApiService.getCharacters(this.nameOfHero, this.limitOfHeroes, this.offset).subscribe((heroes: Array<Hero>) => {
+    this.usingMarvelApiService.getCharacters(this.nameOfHero, this.limitOfHeroes, this.offset).pipe(
+      map((resp) => {
+        this.totalPages = resp.data.total;
+        return resp.data.results;
+      })
+    )
+    .subscribe((heroes: Array<Hero>) => {
+
       this.heroes = heroes;
 
       // Не у всех персонажей есть описание, обработка таких случаев
@@ -46,7 +57,12 @@ export class HerosComponent implements OnInit {
     // Задаем оффсет через переменную страницы из пагинации
     this.offset = page * 10 - 10;
 
-    this.usingMarvelApiService.getCharacters(this.nameOfHero, this.limitOfHeroes, this.offset).subscribe((heroes: Array<Hero>) => {
+    this.usingMarvelApiService.getCharacters(this.nameOfHero, this.limitOfHeroes, this.offset).pipe(
+      map((resp) => {
+        return resp.data.results;
+      })
+    )
+    .subscribe((heroes: Array<Hero>) => {
       this.heroes = heroes;
 
       // Не у всех персонажей есть описание, обработка таких случаев
