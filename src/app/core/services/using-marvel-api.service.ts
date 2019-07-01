@@ -1,7 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient} from '@angular/common/http';
-import { Hero } from '../models/hero';
 import { map } from 'rxjs/operators';
 // API ключи получаем из environments
 @Injectable({
@@ -19,17 +18,29 @@ export class UsingMarvelApiService {
     this.marvelAPIHash = this.injector.get('MARVEL_API_HASH');
     this.marvelAPIKey = this.injector.get('MARVEL_API_PUBKEY');
    }
+   // При инициализации компонента получаем общее количество комиксов или героев для определения последней страницы пагинации
+   amountTotalPages (comicsOrCharacters) {
+    let queryUrl = `${this.marvelAPI}/${comicsOrCharacters}?ts=1&apikey=${this.marvelAPIKey}&hash=${this.marvelAPIHash}`;
+    return this.http.get<any>(queryUrl).pipe(
+      map(resp => {
+        return resp.data.total;
+      })
+    );
+   }
 
    getCharacters (name, limit, offset) {
     let queryUrl = `${this.marvelAPI}/characters?ts=1&apikey=${this.marvelAPIKey}&hash=${this.marvelAPIHash}`;
     if (name) {
       queryUrl += `&nameStartsWith=${name}`;
     } else {
-
       queryUrl += `&offset=${offset}`;
     }
     queryUrl += `&limit=${limit}`;
-    return this.http.get<any>(queryUrl);
+    return this.http.get<any>(queryUrl).pipe(
+      map((resp) => {
+        return resp.data.results;
+      })
+    );
   }
 
   getHero (id) {
@@ -48,7 +59,11 @@ export class UsingMarvelApiService {
     
     queryUrl += `&limit=${limit}`;
 
-    return this.http.get<any>(queryUrl);
+    return this.http.get<any>(queryUrl).pipe(
+      map((resp) => {
+        return resp.data.results;
+      })
+    );
   }
 
   getComic (id){

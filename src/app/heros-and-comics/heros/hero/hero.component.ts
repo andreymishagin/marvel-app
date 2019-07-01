@@ -9,6 +9,8 @@ import { Hero } from 'src/app/core/models/hero';
   styleUrls: ['./hero.component.css']
 })
 export class HeroComponent implements OnInit {
+  loadingHero: boolean;
+
   id: string;
   hero: Hero;
   comicsId: Array<string> = [];
@@ -16,10 +18,12 @@ export class HeroComponent implements OnInit {
   constructor(private usingMarvelApiService: UsingMarvelApiService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loadingHero = true;
+    // Получаем id персонажа из url и используем его как параметр для запроса к API
     this.activatedRoute.params.subscribe(params => this.id = params.heroid);
 
     this.usingMarvelApiService.getHero(this.id).subscribe((hero: Hero) => {
-      // Получаем ID персонажей из выбранного комикса
+      // Получаем id комиксов для выбранного персонажа для перехода на страницу комиксов
       hero[0].comics.items.forEach(element => {
         this.parseUrl(element.resourceURI);
       })
@@ -33,12 +37,12 @@ export class HeroComponent implements OnInit {
       if (this.hero.description === "") this.hero.description = "no official description"
 
       console.log(this.hero);
+      this.loadingHero = false;
     })
   }
-
-    // Извлекаем из resourceURI последний элемент (ID комикса)
-    parseUrl(url: string){
-      let splittedUrl: Array<string> = url.split('/');
-      this.comicsId.push(splittedUrl[splittedUrl.length - 1]);
-    }
+  // Извлекаем из resourceURI последний элемент (id комикса)
+  parseUrl(url: string){
+    let splittedUrl: Array<string> = url.split('/');
+    this.comicsId.push(splittedUrl[splittedUrl.length - 1]);
+  }
 }

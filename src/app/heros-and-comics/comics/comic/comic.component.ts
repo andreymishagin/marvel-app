@@ -9,19 +9,21 @@ import { Comics } from 'src/app/core/models/comics';
   styleUrls: ['./comic.component.css']
 })
 export class ComicComponent implements OnInit {
+  loadingComics: boolean;
+
   id: string;
   comics: Comics;
   charcaterId: Array<string> = [];
 
-  items = [1, 2, 3, 4];
-
   constructor(private usingMarvelApiService: UsingMarvelApiService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loadingComics = true;
+    // Получаем id комикса из url и используем его как параметр для запроса к API
     this.activatedRoute.params.subscribe(params => this.id = params.comicid);
 
     this.usingMarvelApiService.getComic(this.id).subscribe((comics: Comics) => {
-      // Получаем ID персонажей из выбранного комикса
+      // Получаем id персонажей из выбранного комикса для перехода на личную страницу героя
       comics[0].characters.items.forEach(element => {
         this.parseUrl(element.resourceURI);
       })
@@ -33,12 +35,12 @@ export class ComicComponent implements OnInit {
       };
 
       console.log( this.comics );
+      this.loadingComics = false;
     })
   }
-  // Извлекаем из resourceURI последний элемент (ID персонажа)
+  // Извлекаем из resourceURI последний элемент (id персонажа)
   parseUrl(url: string){
     let splittedUrl: Array<string> = url.split('/');
     this.charcaterId.push(splittedUrl[splittedUrl.length - 1]);
   }
-
 }

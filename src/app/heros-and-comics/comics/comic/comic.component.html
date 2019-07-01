@@ -1,16 +1,17 @@
-Страница с детальным описанием комикса <br>
-∙ Детальное описание <br>
-∙ Список героев с переходом на персональную страницу героя <br>
-
+Посмотреть может ли возвращаться больше чем 20 комиксов за один запрос <br>
 <div class="container">
-  <div class="container shadow p-3 mb-5" style="background-color:lightgrey">
+  <div *ngIf="loadingComics">
+    <mat-spinner class="mx-auto"></mat-spinner>
+  </div>
+
+  <div *ngIf="!loadingComics" class="container shadow p-3 mb-5" style="background-color:lightgrey">
     <img class="img-thumbnail" src="{{comics?.thumbnail.path}}/portrait_uncanny.{{comics?.thumbnail.extension}}">
-    <p>Название: {{ comics?.title }} </p>
-    <p>Описание: {{ comics?.description }}</p>
+    <p>Title: {{ comics?.title }} </p>
+    <p>Description: {{ comics?.description }}</p>
     <ul>
-      <p>Ссылки на персонажей из комикса:</p>
+      <p>Heroes list:</p>
       <li *ngFor="let character of comics?.characters.items; index as i"> 
-        <p><a target="_blank" routerLink="/hero/{{charcaterId[i]}}">{{ character.name }} </a> {{ character.check }} </p>
+        <p><a routerLink="/hero/{{charcaterId[i]}}">{{ character.name }} </a> {{ character.check }} </p>
       </li>
     </ul>
   </div>

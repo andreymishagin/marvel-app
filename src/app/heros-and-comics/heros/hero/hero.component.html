@@ -1,26 +1,29 @@
 <br>
 Персональная страница героя <br>
 
-∙Списков комиксов с участием героя с возможностью перехода на страницу конкретного комикса<br>
 Апи возвращает 20 объектов, даже если их на самом деле больше, нужно исправить <br>
-Обработать случай, когда нет доступных комиксов для персонажа
 
 <div class="container">
-  <div class="container shadow p-3 mb-5" style="background-color:lightgrey">
+  
+  <div *ngIf="loadingHero">
+    <mat-spinner class="mx-auto"></mat-spinner>
+  </div>
+
+  <div *ngIf="!loadingHero" class="container shadow p-3 mb-5" style="background-color:lightgrey">
     <img class="img-thumbnail" src="{{hero?.thumbnail.path}}/portrait_uncanny.{{hero?.thumbnail.extension}}">
-    <p>Имя: {{ hero?.name }} </p>
-    <p>Описание: {{ hero?.description }}</p>
+    <p>Name: {{ hero?.name }} </p>
+    <p>Description: {{ hero?.description }}</p>
     <ul>
-      <p>Ссылки:</p>
+      <p>Links:</p>
       <li *ngFor="let url of hero?.urls"> 
         <a target="_blank" href="{{ url.url }}">{{ url.type }}</a>
       </li>
     </ul>
 
     <ul>
-        <p>Список комиксов:</p>
+        <p>Comics list:</p>
         <li *ngFor="let comics of hero?.comics.items; index as i"> 
-          <p> <a target="_blank" routerLink="/comic/{{comicsId[i]}}">{{ comics.name }}</a> {{ comics.check }} </p>
+          <p> <a routerLink="/comic/{{comicsId[i]}}">{{ comics.name }}</a> {{ comics.check }} </p>
         </li>
       </ul>
   </div>
