@@ -1,0 +1,4 @@
+<div *ngIf="errorService.messages.length">
+  <h2>Errors</h2>
+  <div *ngFor='let error of errorService.messages'> {{error}} </div>
+</div>

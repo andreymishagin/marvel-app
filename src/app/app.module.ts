@@ -16,6 +16,7 @@ import { UsingMarvelApiService } from './core/services/using-marvel-api.service'
 import { environment } from 'src/environments/environment';
 import { HeroComponent } from './heroes-and-comics/heroes/hero/hero.component';
 import { ComicComponent } from './heroes-and-comics/comics/comic/comic.component';
+import { ErrorsComponent } from './errors/errors.component';
 
 const routes: Routes = [
   { path: '', component: HeroesAndComicsComponent, pathMatch: 'full'},
@@ -35,7 +36,8 @@ const routes: Routes = [
     HeroesComponent,
     ComicsComponent,
     HeroComponent,
-    ComicComponent
+    ComicComponent,
+    ErrorsComponent
   ],
   imports: [
     BrowserModule,

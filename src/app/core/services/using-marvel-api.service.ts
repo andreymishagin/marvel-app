@@ -1,7 +1,10 @@
 import { Injectable, Injector } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { Hero } from '../models/hero';
+import { ErrorService } from 'src/app/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +15,7 @@ export class UsingMarvelApiService {
   marvelAPIHash: string;
   marvelAPIKey: string;
 
-  constructor(private http: HttpClient, private injector: Injector) {
+  constructor(private http: HttpClient, private injector: Injector, private errorService: ErrorService) {
     this.marvelAPIHash = this.injector.get('MARVEL_API_HASH');
     this.marvelAPIKey = this.injector.get('MARVEL_API_PUBKEY');
   }
@@ -28,7 +31,7 @@ export class UsingMarvelApiService {
     );
   }
 
-  getCharacters(name, limit, offset) {
+  getCharacters (name, limit, offset):  Observable<Hero[]> {
     let queryUrl = `${this.marvelAPI}/characters?ts=1&apikey=${
       this.marvelAPIKey
     }&hash=${this.marvelAPIHash}`;
@@ -38,10 +41,16 @@ export class UsingMarvelApiService {
       queryUrl += `&offset=${offset}`;
     }
     queryUrl += `&limit=${limit}`;
-    return this.http.get<any>(queryUrl).pipe(
+    return this.http.get<{
+      data: {results: Array<Hero>}
+    }>
+    (queryUrl).pipe(
       map(resp => {
         return resp.data.results;
-      })
+      }), catchError(err => { 
+        this.log(err.message); 
+        return throwError(err);
+    })
     );
   }
 
@@ -53,7 +62,10 @@ export class UsingMarvelApiService {
     return this.http.get<any>(queryUrl).pipe(
       map(resp => {
         return resp.data.results;
-      })
+      }), catchError(err => { 
+        this.log(err.message); 
+        return throwError(err);
+    })
     );
   }
   getComics(limit, offset) {
@@ -67,7 +79,10 @@ export class UsingMarvelApiService {
     return this.http.get<any>(queryUrl).pipe(
       map(resp => {
         return resp.data.results;
-      })
+      }), catchError(err => { 
+        this.log(err.message); 
+        return throwError(err);
+    })
     );
   }
 
@@ -79,7 +94,14 @@ export class UsingMarvelApiService {
     return this.http.get<any>(queryUrl).pipe(
       map(resp => {
         return resp.data.results;
-      })
+      }), catchError(err => { 
+        this.log(err.message); 
+        return throwError(err);
+    })
     );
+  }
+
+  private log(message: string) {
+    this.errorService.add(`Error: ${message}`);
   }
 }
