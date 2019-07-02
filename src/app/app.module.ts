@@ -9,18 +9,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialAppModule } from './ngmaterial.module';
 
 import { AppComponent } from './app.component';
-import { HerosAndComicsComponent } from './heros-and-comics/heros-and-comics.component';
-import { HerosComponent } from './heros-and-comics/heros/heros.component';
-import { ComicsComponent } from './heros-and-comics/comics/comics.component';
+import { HeroesAndComicsComponent } from './heroes-and-comics/heroes-and-comics.component';
+import { HeroesComponent } from './heroes-and-comics/heroes/heroes.component';
+import { ComicsComponent } from './heroes-and-comics/comics/comics.component';
 import { UsingMarvelApiService } from './core/services/using-marvel-api.service';
 import { environment } from 'src/environments/environment';
-import { HeroComponent } from './heros-and-comics/heros/hero/hero.component';
-import { ComicComponent } from './heros-and-comics/comics/comic/comic.component';
+import { HeroComponent } from './heroes-and-comics/heroes/hero/hero.component';
+import { ComicComponent } from './heroes-and-comics/comics/comic/comic.component';
 
 const routes: Routes = [
-  { path: '', component: HerosAndComicsComponent, pathMatch: 'full'},
+  { path: '', component: HeroesAndComicsComponent, pathMatch: 'full'},
   { path: 'hero/:heroid', component: HeroComponent },
-  { path: 'heros', component: HerosComponent },
+  { path: 'heros', component: HeroesComponent },
   { path: 'comic/:comicid', component: ComicComponent },
   { path: 'comics', component: ComicsComponent },
   { path: '**', redirectTo: '' }
@@ -29,10 +29,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HerosComponent,
+    HeroesComponent,
     ComicsComponent,
-    HerosAndComicsComponent,
-    HerosComponent,
+    HeroesAndComicsComponent,
+    HeroesComponent,
     ComicsComponent,
     HeroComponent,
     ComicComponent

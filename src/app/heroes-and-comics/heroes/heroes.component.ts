@@ -6,10 +6,10 @@ import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-heros',
-  templateUrl: './heros.component.html',
-  styleUrls: ['./heros.component.css']
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.css']
 })
-export class HerosComponent implements OnInit {
+export class HeroesComponent implements OnInit {
   page = 1;
   loadingHeroes: boolean;
   hidePagination = false;

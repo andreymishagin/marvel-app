@@ -25,3 +25,64 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+Данный проект реализует тестовое задание от STM labs Мишагиным А.М.
+
+## Структура проекта
+
+```
+ marvel-app
+├── src
+	├── app
+        ├── core
+            ├── models
+                ├── comics.ts
+                └── hero.ts
+            ├── services
+                ├── using-marvel-api.service.spec.ts
+                └── using-marvel-api.service.ts
+		├── heroes-and-comics
+			├── comics
+				├── comic
+					├── comic.component.css
+					├── comic.component.html
+					├── comic.component.spec.ts
+					└── comic.component.ts
+				├── comics.component.css
+				├── comics.component.html
+				├── comics.component.spec.ts
+				└── comics.component.ts
+			├── heroes
+				├── hero
+					├── hero.component.css
+					├── hero.component.html
+					├── hero.component.spec.ts
+					└── hero.component.ts
+				├── heroes.component.css
+				├── heroes.component.html
+				├── heroes.component.spec.ts
+				└── heroes.component.ts
+			├── heroes-and-comics.component.css
+			├── heroes-and-comics.component.html
+			├── heroes-and-comics.component.spec.ts
+			└── heroes-and-comics.component.ts
+        ├── app.component.css
+        ├── app.component.html
+        ├── app.component.spec.ts
+	    ├── app.component.ts
+	    ├── app.module.ts
+	    └── ngmaterial.module.ts
+		├── assets
+			├── .gitkeep
+			└── GitHub-Mark-32px.png
+		├── environments
+			├── environment.prod.ts
+			└── environment.ts
+		├── favicon.ico
+		├── index.html
+		├── main.ts
+		├── polyfills.ts
+		├── styles.css
+		└── test.ts
+
+```
