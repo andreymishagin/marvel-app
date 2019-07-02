@@ -41,7 +41,6 @@ export class ComicComponent implements OnInit {
         });
       }
 
-      console.log(this.comics);
       this.loadingComics = false;
     });
   }

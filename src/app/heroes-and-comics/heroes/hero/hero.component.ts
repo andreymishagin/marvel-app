@@ -44,8 +44,6 @@ export class HeroComponent implements OnInit {
       if (this.hero.description === '') {
         this.hero.description = 'no official description';
       }
-
-      console.log(this.hero);
       this.loadingHero = false;
     });
   }

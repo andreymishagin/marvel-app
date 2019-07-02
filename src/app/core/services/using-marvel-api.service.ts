@@ -100,7 +100,7 @@ export class UsingMarvelApiService {
     })
     );
   }
-
+  // При ошибке get-запроса выводим ее на экран пользователю
   private log(message: string) {
     this.errorService.add(`Error: ${message}`);
   }

@@ -48,7 +48,6 @@ export class HeroesComponent implements OnInit {
             hero.description = 'no short bio';
           }
         });
-        console.log(this.heroes);
         this.loadingHeroes = false;
         this.hidePagination = false;
       });
@@ -73,7 +72,6 @@ export class HeroesComponent implements OnInit {
                 hero.description = 'no short bio';
               }
             });
-            console.log(this.heroes);
             this.loadingHeroes = false;
           });
       });

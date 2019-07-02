@@ -34,7 +34,6 @@ export class ComicsComponent implements OnInit {
       this.comics.forEach(element => {
         if (element.description === null) { element.description = 'no short description'; }
       });
-      console.log(this.comics);
       this.loadingComics = false;
     });
   }
