@@ -148,3 +148,10 @@
 		├── styles.css
 		└── test.ts
 ```
+## Запуск приложения
+
+* Склонировать репозиторий `git clone https://github.com/andreymishagin/marvel-app.git`
+
+* Установить модули `npm i`
+
+* Запустить приложение на http://localhost:4200/ `ng serve --open`
