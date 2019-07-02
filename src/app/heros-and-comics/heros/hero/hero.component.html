@@ -4,7 +4,7 @@
 Апи возвращает 20 объектов, даже если их на самом деле больше, нужно исправить <br>
 
 <div class="container">
-  
+
   <div *ngIf="loadingHero">
     <mat-spinner class="mx-auto"></mat-spinner>
   </div>
@@ -15,16 +15,16 @@
     <p>Description: {{ hero?.description }}</p>
     <ul>
       <p>Links:</p>
-      <li *ngFor="let url of hero?.urls"> 
+      <li *ngFor="let url of hero?.urls">
         <a target="_blank" href="{{ url.url }}">{{ url.type }}</a>
       </li>
     </ul>
 
     <ul>
-        <p>Comics list:</p>
-        <li *ngFor="let comics of hero?.comics.items; index as i"> 
-          <p> <a routerLink="/comic/{{comicsId[i]}}">{{ comics.name }}</a> {{ comics.check }} </p>
-        </li>
-      </ul>
+      <p>Comics list:</p>
+      <li *ngFor="let comics of hero?.comics.items; index as i">
+        <p> <a routerLink="/comic/{{comicsId[i]}}">{{ comics.name }}</a> {{ comics.check }} </p>
+      </li>
+    </ul>
   </div>
 </div>

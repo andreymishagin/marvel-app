@@ -1,17 +1,17 @@
-.myButtons{
-    width: 300px;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Indie Flower', cursive;
-    font-size: 32px;
-    font-weight: 700;
-    text-align: center;
-    text-decoration: none;
-    padding: .8em 1em calc(.8em + 3px);
+.myButtons {
+  width: 300px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Indie Flower", cursive;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.8em 1em calc(0.8em + 3px);
 }
-.links{
+.links {
   text-decoration: none;
   color: white;
 }

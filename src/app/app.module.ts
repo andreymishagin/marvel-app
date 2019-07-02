@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule }   from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialAppModule } from './ngmaterial.module';
@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 import { HeroComponent } from './heros-and-comics/heros/hero/hero.component';
 import { ComicComponent } from './heros-and-comics/comics/comic/comic.component';
 
-const routes: Routes =[
+const routes: Routes = [
   { path: '', component: HerosAndComicsComponent, pathMatch: 'full'},
   { path: 'hero/:heroid', component: HeroComponent },
   { path: 'heros', component: HerosComponent },
@@ -51,7 +51,7 @@ const routes: Routes =[
     UsingMarvelApiService,
     {
       provide: 'MARVEL_API_PUBKEY',
-      useValue: environment.marvelPubKey  
+      useValue: environment.marvelPubKey
     }, {
       provide: 'MARVEL_API_HASH',
       useValue: environment.marvelPubHash

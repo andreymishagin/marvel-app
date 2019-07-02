@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UsingMarvelApiService } from 'src/app/core/services/using-marvel-api.service';
 import { Hero } from 'src/app/core/models/hero';
-import { map, debounceTime } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-heros',
@@ -10,8 +10,7 @@ import { map, debounceTime } from 'rxjs/operators';
   styleUrls: ['./heros.component.css']
 })
 export class HerosComponent implements OnInit {
-
-  page: number = 1;
+  page = 1;
   loadingHeroes: boolean;
   hidePagination = false;
 
@@ -26,7 +25,7 @@ export class HerosComponent implements OnInit {
   offset: number;
   totalPages: number;
 
-  constructor(private usingMarvelApiService: UsingMarvelApiService) { }
+  constructor(private usingMarvelApiService: UsingMarvelApiService) {}
 
   ngOnInit() {
     this.loadingHeroes = true;
@@ -34,40 +33,50 @@ export class HerosComponent implements OnInit {
     this.limitOfHeroes = 10;
     this.offset = 0;
     // Получаем общее количество героев для определения пагинации
-    this.usingMarvelApiService.amountTotalPages('characters').subscribe(totalPages => this.totalPages = totalPages);
+    this.usingMarvelApiService
+      .amountTotalPages('characters')
+      .subscribe(totalPages => (this.totalPages = totalPages));
 
-    this.usingMarvelApiService.getCharacters(this.nameOfHero, this.limitOfHeroes, this.offset)
-    .subscribe((heroes: Array<Hero>) => {
-      this.heroes = heroes;
-
-      // Не у всех персонажей есть описание, обработка таких случаев
-      this.heroes.forEach(function(hero){
-        if (hero.description === "") hero.description = "no short bio"
-      })
-      console.log(this.heroes);
-      this.loadingHeroes = false;
-      this.hidePagination = false;
-    })
-
-    this.searchForm.get('name').valueChanges.pipe(
-      debounceTime(400)
-    ).subscribe((nameVal) => {
-      // Убираем пагинацию при поиске героя, возвращаем пагинацию, когда очищаем форму
-      this.loadingHeroes = true;
-      this.hidePagination = true;
-      if (nameVal === '') this.hidePagination = false;
-      this.usingMarvelApiService.getCharacters(nameVal, this.limitOfHeroes, 0)
+    this.usingMarvelApiService
+      .getCharacters(this.nameOfHero, this.limitOfHeroes, this.offset)
       .subscribe((heroes: Array<Hero>) => {
-
         this.heroes = heroes;
+
         // Не у всех персонажей есть описание, обработка таких случаев
-        this.heroes.forEach(function(hero){
-          if (hero.description === "") hero.description = "no short bio"
-        })
+        this.heroes.forEach(hero => {
+          if (hero.description === '') {
+            hero.description = 'no short bio';
+          }
+        });
         console.log(this.heroes);
         this.loadingHeroes = false;
-      })
-    });
+        this.hidePagination = false;
+      });
+
+    this.searchForm
+      .get('name')
+      .valueChanges.pipe(debounceTime(400))
+      .subscribe(nameVal => {
+        // Убираем пагинацию при поиске героя, возвращаем пагинацию, когда очищаем форму
+        this.loadingHeroes = true;
+        this.hidePagination = true;
+        if (nameVal === '') {
+          this.hidePagination = false;
+        }
+        this.usingMarvelApiService
+          .getCharacters(nameVal, this.limitOfHeroes, 0)
+          .subscribe((heroes: Array<Hero>) => {
+            this.heroes = heroes;
+            // Не у всех персонажей есть описание, обработка таких случаев
+            this.heroes.forEach(hero => {
+              if (hero.description === '') {
+                hero.description = 'no short bio';
+              }
+            });
+            console.log(this.heroes);
+            this.loadingHeroes = false;
+          });
+      });
   }
 
   loadSelectedList(page) {
@@ -75,15 +84,18 @@ export class HerosComponent implements OnInit {
     // Задаем оффсет через переменную страницы из пагинации
     this.offset = page * 10 - 10;
 
-    this.usingMarvelApiService.getCharacters(this.nameOfHero, this.limitOfHeroes, this.offset)
-    .subscribe((heroes: Array<Hero>) => {
-      this.heroes = heroes;
-      // Не у всех персонажей есть описание, обработка таких случаев
-      this.heroes.forEach(function(hero){
-        if (hero.description === "") hero.description = "no short bio"
-      })
-      this.loadingHeroes = false;
-      this.hidePagination = false;
-    })
+    this.usingMarvelApiService
+      .getCharacters(this.nameOfHero, this.limitOfHeroes, this.offset)
+      .subscribe((heroes: Array<Hero>) => {
+        this.heroes = heroes;
+        // Не у всех персонажей есть описание, обработка таких случаев
+        this.heroes.forEach(hero => {
+          if (hero.description === '') {
+            hero.description = 'no short bio';
+          }
+        });
+        this.loadingHeroes = false;
+        this.hidePagination = false;
+      });
   }
 }

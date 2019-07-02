@@ -1,15 +1,10 @@
 <div class="container">
   <form [formGroup]="searchForm">
     <input type="text" formControlName="name" placeholder="Search by name">
-    <button
-    *ngIf="searchForm.get('name').value"
-    mat-button
-    matSuffix
-    mat-icon-button
-    aria-label="Clear"
-    (click)="searchForm.get('name').setValue('');">
-    <mat-icon>close</mat-icon>
-  </button>
+    <button *ngIf="searchForm.get('name').value" mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="searchForm.get('name').setValue('');">
+      <mat-icon>close</mat-icon>
+    </button>
   </form>
   <br>
 
@@ -19,12 +14,13 @@
 
   <div *ngIf="!loadingHeroes" class="container shadow p-3 mb-5" style="background-color:lightgrey">
     <ul>
-      <li *ngFor="let hero of heroes | paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalPages }"> 
+      <li *ngFor="let hero of heroes | paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalPages }">
         <img class="img-thumbnail" src="{{hero.thumbnail.path}}/standard_medium.{{hero.thumbnail.extension}}">
-        <p>Name:  <a routerLink="/hero/{{hero.id}}">{{ hero?.name }} </a> </p>
-        <p>Description: {{ hero?.description }}</p> 
+        <p>Name: <a routerLink="/hero/{{hero.id}}">{{ hero?.name }} </a> </p>
+        <p>Description: {{ hero?.description }}</p>
       </li>
     </ul>
-    <pagination-controls *ngIf="!hidePagination" (pageChange)="page = $event" maxSize="10" (click)="loadSelectedList(page)"></pagination-controls>
+    <pagination-controls *ngIf="!hidePagination" (pageChange)="page = $event" maxSize="10"
+      (click)="loadSelectedList(page)"></pagination-controls>
   </div>
 </div>

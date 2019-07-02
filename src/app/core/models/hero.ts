@@ -3,11 +3,11 @@ export interface Hero {
     available: number;
     collectionURI: string;
     items: Array<{
-      resourceURI: string,
-      name: string,
+      resourceURI: string;
+      name: string;
       // Используем check, в том случае, когда API не возвращает список комиксов для персонажа
       check: string;
-    }>
+    }>;
   };
   thumbnail: {
     extension: string;

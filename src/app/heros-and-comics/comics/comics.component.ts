@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsingMarvelApiService } from 'src/app/core/services/using-marvel-api.service';
 import { Comics } from 'src/app/core/models/comics';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-comics',
@@ -13,7 +12,7 @@ export class ComicsComponent implements OnInit {
   loadingComics: boolean;
 
   comics: Array<Comics> = [];
-  page: number = 1;
+  page = 1;
   totalPages: number;
 
   limitOfComics: number;
@@ -33,12 +32,12 @@ export class ComicsComponent implements OnInit {
       this.comics = comics;
 
       this.comics.forEach(element => {
-        if (element.description === null) element.description = "no short description"
+        if (element.description === null) { element.description = 'no short description'; }
       });
       console.log(this.comics);
       this.loadingComics = false;
     });
-  };
+  }
 
   loadSelectedList(page) {
     this.loadingComics = true;
@@ -50,9 +49,9 @@ export class ComicsComponent implements OnInit {
       this.comics = comics;
 
       this.comics.forEach(element => {
-        if (element.description === null) element.description = "no short description"
+        if (element.description === null) { element.description = 'no short description'; }
       });
       this.loadingComics = false;
-    })
+    });
   }
 }
