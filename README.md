@@ -4,7 +4,7 @@
 
 ## Live demo
 
-Ссылка на gh pages
+https://andreymishagin.github.io/marvel-app/
 
 ## Задание
 
