@@ -61,7 +61,6 @@
       ├── app.component.css
       ├── app.component.html
       ├── app.component.spec.ts
-      
 	    ├── app.component.ts
 	    ├── app.module.ts
 	    └── ngmaterial.module.ts
